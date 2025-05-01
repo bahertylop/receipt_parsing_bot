@@ -2,18 +2,19 @@ package org.example;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.service.qr.QrHandler;
+import org.example.service.qr.QrService;
 import org.example.service.TextMessageHandlingService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
-import org.telegram.telegrambots.meta.api.objects.Message;
-import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.api.objects.User;
+import org.telegram.telegrambots.meta.api.objects.*;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboard;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.List;
 
 @Slf4j
 @Component
@@ -28,9 +29,11 @@ public class ReceiptParsingBot extends TelegramLongPollingBot {
 
     private final TextMessageHandlingService textMessageHandlingService;
 
+    private final QrHandler qrHandler;
+
     @Override
     public void onUpdateReceived(Update update) {
-        if (update.hasMessage()) {
+        if (update.hasMessage() && update.getMessage().hasText()) {
             Message message = update.getMessage();
             Long chatId = message.getChatId();
 
@@ -41,6 +44,10 @@ public class ReceiptParsingBot extends TelegramLongPollingBot {
 
             textMessageHandlingService.onMessageReceived(this, chatId, message);
         }
+        if (update.hasMessage() && update.getMessage().hasPhoto()) {
+            qrHandler.handleQr(this, update.getMessage());
+        }
+
 //        if (update.hasCallbackQuery()) {
 //            CallbackQuery callbackQuery = update.getCallbackQuery();
 //            Long chatId = callbackQuery.getFrom().getId();

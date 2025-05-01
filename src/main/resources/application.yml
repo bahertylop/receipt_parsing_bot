@@ -16,3 +16,6 @@ spring:
       hibernate:
         enable_lazy_load_no_trans: true
         format_sql: true
+feign:
+  httpclient:
+    enabled: true
