@@ -1,0 +1,18 @@
+bot:
+  token: 7365003829:AAH4H1kkS8ICteJahGL5x80oZhY0SNBMIHY
+  name: receipt_parsing_bot
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/receipt_parsing_db
+    username: postgres
+    password: agroycg592:ggg
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        format_sql: true
