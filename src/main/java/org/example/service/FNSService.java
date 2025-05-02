@@ -2,10 +2,9 @@ package org.example.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.CheckResponseDto;
+import org.example.dto.response.CheckResponseDto;
 import org.example.dto.FNSFeignRequest;
 import org.example.feign.FnsApiClient;
-import org.hibernate.annotations.Check;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -17,7 +16,7 @@ public class FNSService {
 
     private final FnsApiClient apiClient;
 
-    public void getReceiptInfo(String qrInfo) {
+    public CheckResponseDto getReceiptInfo(String qrInfo) {
         FNSFeignRequest request = FNSFeignRequest.builder()
                 .token(fnsToken)
                 .qrraw(qrInfo)
@@ -26,9 +25,11 @@ public class FNSService {
         try {
             CheckResponseDto response = apiClient.getReceiptInfo(request);
             System.out.println(response);
-            return;
+            return response;
         } catch (Exception e) {
             log.error("error: ", e);
         }
+
+        return null;
     }
 }

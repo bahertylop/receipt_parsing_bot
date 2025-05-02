@@ -1,13 +1,10 @@
 package org.example.feign;
 
-import org.example.dto.CheckResponseDto;
+import org.example.dto.response.CheckResponseDto;
 import org.example.dto.FNSFeignRequest;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 @FeignClient(name = "fnsApiClient", url = "https://proverkacheka.com")
 public interface FnsApiClient {

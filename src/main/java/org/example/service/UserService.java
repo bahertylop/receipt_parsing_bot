@@ -5,6 +5,7 @@ import org.example.dto.UserDto;
 import org.example.model.User;
 import org.example.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -26,5 +27,17 @@ public class UserService {
                 .build();
 
         userRepository.save(user);
+    }
+
+    @Transactional
+    public void setUserBotState(Long chatId, User.BotState newBotState) {
+        Optional<User> userOp = userRepository.findUserByChatId(chatId);
+
+        if (userOp.isPresent()) {
+            User user = userOp.get();
+            user.setBotState(newBotState);
+
+            userRepository.save(user);
+        }
     }
 }
