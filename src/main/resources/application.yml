@@ -1,5 +1,5 @@
 bot:
-  token: 7365003829:AAH4H1kkS8ICteJahGL5x80oZhY0SNBMIHY
+  token: ""
   name: receipt_parsing_bot
 
 spring:

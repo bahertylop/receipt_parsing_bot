@@ -45,7 +45,7 @@ public class ReceiptService {
 
         // путь к tessdata
         tesseract.setDatapath("D:\\desseract\\tessdata");
-        
+
         tesseract.setLanguage("rus");
 
         KannyDetectorUtil.kannyUtil(destinationPath, fileId, extension);
