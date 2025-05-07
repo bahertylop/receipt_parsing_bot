@@ -7,6 +7,7 @@ import org.example.ReceiptParsingBot;
 import org.example.dto.SenderDto;
 import org.example.service.command.handlers.DefaultCommandHandler;
 import org.example.service.command.handlers.StartCommandHandler;
+import org.example.service.command.handlers.TestCommandHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -34,6 +35,8 @@ public class CommandService {
         switch (commandNameUn) {
             case "start":
                 return StringUtils.uncapitalize(StartCommandHandler.class.getSimpleName());
+            case "test":
+                return StringUtils.uncapitalize(TestCommandHandler.class.getSimpleName());
             default:
                 System.out.println(StringUtils.uncapitalize(DefaultCommandHandler.class.getSimpleName()));
                 return StringUtils.uncapitalize(DefaultCommandHandler.class.getSimpleName());
