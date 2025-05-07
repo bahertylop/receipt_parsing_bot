@@ -109,7 +109,7 @@ public class KannyDetectorUtil {
 //        opencv_imgproc.morphologyEx(binary, binary, opencv_imgproc.MORPH_CLOSE, kernel);
 
         opencv_imgproc.resize(binary, binary, new Size(binary.cols() * 4, binary.rows() * 4));
-        
+
         opencv_imgcodecs.imwrite("D:/android_developing/IdiaProjects/receipt_parsing_bot/src/main/resources/adaptiveThreshold/photo_" + fileId + "." + extension, binary);
         System.out.println("Изображение очищено и сохранено как photo_" + fileId + "." + extension);
     }

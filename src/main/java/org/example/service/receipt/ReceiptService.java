@@ -35,7 +35,7 @@ public class ReceiptService {
         String filePath = file.getFilePath();
         String fileUrl = "https://api.telegram.org/file/bot" + bot.getBotToken() + "/" + filePath;
 
-        // получим расширение из пути
+
         String extension = filePath.substring(filePath.lastIndexOf('.') + 1);
         String destinationPath = "D:/android_developing/IdiaProjects/receipt_parsing_bot/src/main/resources/photos/photo_" + fileId + "." + extension;
 
@@ -43,10 +43,9 @@ public class ReceiptService {
 
         Tesseract tesseract = new Tesseract();
 
-        // Укажи путь к tessdata, где хранятся языковые файлы
+        // путь к tessdata
         tesseract.setDatapath("D:\\desseract\\tessdata");
-
-        // Укажи язык (например, "eng" или "rus" — не забудь скачать соответствующий язык)
+        
         tesseract.setLanguage("rus");
 
         KannyDetectorUtil.kannyUtil(destinationPath, fileId, extension);
